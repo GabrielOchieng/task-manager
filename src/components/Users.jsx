@@ -42,10 +42,10 @@ const User = ({ _id, name, email, role, onEdit, onDelete }) => {
           </>
         )}
       </td>
-      <td className="px-6 py-4 border-b border-gray-200 dark:border-gray-700  ">
+      <td className="px-2 md:px-6 py-4 border-b border-gray-200 dark:border-gray-700  ">
         <div className="flex justify-between">
           <button
-            className="text-blue-500 hover:text-blue-700 ml-5"
+            className="text-blue-500 hover:text-blue-700 ml-1 md:ml-5"
             onClick={() => onEdit(_id)}
           >
             <MdEdit />
