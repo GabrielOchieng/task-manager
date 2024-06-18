@@ -22,49 +22,6 @@ const LoginPage = () => {
     }
   }, [navigate, userInfo]);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const res = await login({
-  //       email,
-  //       password,
-  //     }).unwrap();
-  //     dispatch(setCredentials({ ...res }));
-  //     console.log(res);
-  //     navigate("/");
-  //   } catch (err) {
-  //     toast.error(err?.data?.message || err.error);
-  //   }
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const res = await login({
-  //       email,
-  //       password,
-  //       headers, // Include headers object with token (if available)
-  //     }).unwrap();
-
-  //     const token = localStorage.setItem("token"); // Assuming local storage
-  //     console.log("token", token);
-  //     const headers = {
-  //       "Content-Type": "application/json", // Assuming JSON data
-  //     };
-
-  //     if (token) {
-  //       headers.Authorization = `Bearer ${token}`;
-  //     }
-
-  //     dispatch(setCredentials({ ...res }));
-  //     navigate("/");
-  //   } catch (err) {
-  //     toast.error(err?.data?.message || err.error);
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 

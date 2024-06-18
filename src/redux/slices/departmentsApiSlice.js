@@ -1,6 +1,7 @@
 import { apiSlice } from "./apiSlice";
 
-const DEPARTMENTS_URL = "http://localhost:5000/departments";
+const DEPARTMENTS_URL =
+  "https://task-manager-api-cv0m.onrender.com/departments";
 
 export const departmentsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

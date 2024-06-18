@@ -1,35 +1,3 @@
-// import React from "react";
-
-// const Departments = ({ departments }) => {
-//   if (!departments?.length) {
-//     return <p>No departments found.</p>;
-//   }
-
-//   return (
-//     <ul className="list-none pl-4 divide-y divide-gray-200">
-//       {departments.map((department) => (
-//         <li key={department._id} className="py-2 hover:bg-gray-100">
-//           <div className="flex justify-between items-center">
-//             <h3 className="font-bold">{department.name}</h3>
-//             {/* Removed button for toggling details */}
-//           </div>
-//           <div>
-//             <p className="font-medium">Users:</p>
-//             <ul className="list-disc pl-4">
-//               {department.users?.map((user) => (
-//                 <li key={user._id}>{user.name}</li>
-//               ))}
-//               {department.users?.length === 0 && <li>No users assigned.</li>}
-//             </ul>
-//           </div>
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// };
-
-// export default Departments;
-
 import React from "react";
 import { Link } from "react-router-dom";
 

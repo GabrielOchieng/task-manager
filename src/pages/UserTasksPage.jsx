@@ -17,7 +17,7 @@ function UserTasksPage() {
       setError(null);
       try {
         const response = await fetch(
-          `http://localhost:5000/tasks/${userId}/tasks`
+          `https://task-manager-api-cv0m.onrender.com/tasks/${userId}/tasks`
         ); // Get user tasks
         if (!response.ok) {
           throw new Error(`Error fetching tasks: ${response.statusText}`);
@@ -33,19 +33,6 @@ function UserTasksPage() {
 
     fetchTasks();
   }, [userId]);
-
-  // const handleMarkDone = async (taskId) => {
-  //   // Simulate updating task status on server (replace with your actual API call)
-  //   if (window.confirm("Are you sure you have completed this task?")) {
-  //     setTasks((prevTasks) =>
-  //       prevTasks.map((task) =>
-  //         task._id === taskId
-  //           ? { ...task, completed: true, inProgress: false }
-  //           : task
-  //       )
-  //     );
-  //   }
-  // };
 
   const handleMarkDone = async (taskId) => {
     if (window.confirm("Are you sure you have completed this task?")) {

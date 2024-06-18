@@ -8,9 +8,6 @@ const Header = () => {
       data-testid="header"
     >
       <div className="w-full md:w-[60%] pl-6 flex flex-col gap-6 justify-center items-start">
-        {/* Company Logo (Optional) */}
-        {/* <img src="/company_logo.png" alt="{companyName} Logo" className="w-24 h-auto mb-4" /> */}
-
         <h1
           className="font-bold text-3xl sm:text-5xl md:text-6xl"
           data-testid="header-title"

@@ -76,23 +76,6 @@ const EditTask = ({ task, handleChange, handleUpdateTask }) => {
                 </option>
               ))}
         </select>
-        {/* <label htmlFor="assignedTo" className="mb-1">
-          Assigned User:
-        </label>
-        <select
-          id="assignedTo"
-          name="assignedTo"
-          value={task.assignedTo}
-          onChange={handleChange}
-          className="px-3 py-2 border border-gray-300 rounded-md focus:outline-blue-500 focus:ring-1 focus:ring-blue-500"
-        >
-          <option value="">Select User</option>
-          {users?.map((user) => (
-            <option key={user._id} value={user._id}>
-              {user.name}
-            </option>
-          ))}
-        </select> */}
       </div>
 
       <div className="flex flex-col mb-2">
