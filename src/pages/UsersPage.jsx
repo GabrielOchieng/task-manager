@@ -16,7 +16,6 @@ const UsersPage = () => {
     name: "",
     email: "",
     role: "",
-    department: "",
   });
 
   const { data: users, isLoading, error } = useGetAllUsersQuery();
@@ -31,7 +30,6 @@ const UsersPage = () => {
       name: userToEdit.name,
       email: userToEdit.email,
       role: userToEdit.role,
-      department: userToEdit?.department?._id,
     });
   };
 
@@ -39,7 +37,7 @@ const UsersPage = () => {
   const handleCloseModal = () => {
     setIsEditing(false);
     setSelectedUserId(null);
-    setEditedUserData({ name: "", email: "", role: "", department: "" });
+    setEditedUserData({ name: "", email: "", role: "" });
   };
 
   const handleUpdateUser = async () => {

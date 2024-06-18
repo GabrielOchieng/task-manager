@@ -11,6 +11,7 @@ import Task from "../components/Task";
 import { useGetAllUsersQuery } from "../redux/slices/usersApiSlice";
 import EditTask from "../components/EditTask";
 import Modal from "../components/Modal";
+import { useGetDepartmentsQuery } from "../redux/slices/departmentsApiSlice";
 
 const TasksPage = () => {
   const [duties, setDuties] = useState([]);
@@ -22,22 +23,26 @@ const TasksPage = () => {
     title: "",
     description: "",
     assignedTo: "",
+    departmentId: "",
     dueDate: "",
   });
   const [selectedTaskId, setSelectedTaskId] = useState(null); //task selected for editing
   // const [users, setUsers] = useState([]); // State to store fetched users
   const [selectedUserId, setSelectedUserId] = useState(""); // State for selected user ID
+  const [selectedDepartmentId, setSelectedDepartmentId] = useState(""); // State for selected user ID
   const [deleteTask] = useDeleteTaskMutation(); // Destructure deleteTask Function
   const [updateTask] = useUpdateTaskMutation(); // Destructure updateTask mutation
   const { data: users } = useGetAllUsersQuery();
   const { data: tasks, isLoading, error } = useGetTasksQuery();
+  const { data: departments } = useGetDepartmentsQuery();
 
   const filteredTasks = tasks?.filter((task) => !task.completed); // Filter tasks where completed is false
-  console.log(filteredTasks);
-
-  const dispatch = useDispatch();
+  console.log(tasks);
+  console.log("filtered: ", filteredTasks);
 
   const [createTask, { isLoading: isCreatingTask }] = useCreateTaskMutation();
+
+  // console.log("SELECTED", department);
 
   const handleAddTask = async (e) => {
     e.preventDefault();
@@ -48,6 +53,10 @@ const TasksPage = () => {
       alert("Please select a user to assign the task to.");
       return;
     }
+    if (!selectedDepartmentId) {
+      alert("Please select a department for the task.");
+      return;
+    }
 
     try {
       console.log("selectedUserId:", selectedUserId); // Log the selected user ID
@@ -56,6 +65,7 @@ const TasksPage = () => {
         title: newTaskTitle,
         description: newTaskDescription,
         assignedTo: selectedUserId,
+        departmentId: selectedDepartmentId,
         dueDate: newDate, // Add the newDate variable
       });
 
@@ -87,6 +97,7 @@ const TasksPage = () => {
       title: taskToEdit?.title,
       description: taskToEdit?.description,
       assignedTo: taskToEdit?.assignedTo,
+      departmentId: taskToEdit?.department?._id,
       dueDate: taskToEdit?.dueDate,
     });
   };
@@ -98,12 +109,16 @@ const TasksPage = () => {
       title: "",
       description: "",
       assignedTo: "",
+      departmentId: "",
       dueDate: "",
     });
   };
 
   const handleUpdateTask = async () => {
+    console.log("Data sent to backend:", editedTaskData); // Log editedTaskData before sending
+
     try {
+      console.log("EDITTING", editedTaskData);
       const response = await updateTask({
         ...editedTaskData,
         _id: selectedTaskId,
@@ -118,6 +133,7 @@ const TasksPage = () => {
         title: "",
         description: "",
         assignedTo: "",
+        departmentId: "",
         dueDate: "",
       });
     } catch (error) {
@@ -176,16 +192,36 @@ const TasksPage = () => {
             ></textarea>
             <select
               className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-blue-500 focus:ring-1 w-full"
+              value={selectedDepartmentId}
+              onChange={(e) => setSelectedDepartmentId(e.target.value)}
+            >
+              <option value="">Select Department</option>
+              {departments?.map((department) => (
+                <option key={department._id} value={department._id}>
+                  {department.name}
+                </option>
+              ))}
+            </select>
+
+            <select
+              className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-blue-500 focus:ring-1 w-full"
               value={selectedUserId}
               onChange={(e) => setSelectedUserId(e.target.value)}
             >
               <option value="">Select User</option>
-              {users?.map((user) => (
-                <option key={user._id} value={user._id}>
-                  {user.name}
-                </option>
-              ))}
+              {/* Allow selection of only user within the selected department  */}
+              {selectedDepartmentId &&
+                departments
+                  ?.find(
+                    (department) => department._id === selectedDepartmentId
+                  )
+                  ?.users?.map((user) => (
+                    <option key={user._id} value={user._id}>
+                      {user.name}
+                    </option>
+                  ))}
             </select>
+
             <input
               className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-blue-500 focus:ring-1 w-full"
               type="date"
@@ -210,6 +246,9 @@ const TasksPage = () => {
             <tr>
               <th className="px-3 md:px-6 py-3 border-b border-r border-gray-200 dark:border-gray-700">
                 Title
+              </th>
+              <th className="px-3 md:px-6 py-3 border-b border-r border-gray-200 dark:border-gray-700">
+                Department
               </th>
               <th className="px-3 md:px-6 py-3 border-b border-r border-gray-200 dark:border-gray-700">
                 Assigned To

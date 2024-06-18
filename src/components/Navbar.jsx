@@ -68,25 +68,26 @@ const Navbar = () => {
           <Link to="/" className=" hover:underline" data-testid="home-link">
             Home
           </Link>
-          {manager ||
-            (admin && (
-              <>
-                <Link
-                  to="/users"
-                  className=" hover:underline"
-                  data-testid="users-link"
-                >
-                  Users
-                </Link>
-                <Link
-                  to="/departments"
-                  className=" hover:underline"
-                  data-testid="users-link"
-                >
-                  Departments
-                </Link>
-              </>
-            ))}
+          {manager || admin ? (
+            <>
+              <Link
+                to="/users"
+                className=" hover:underline"
+                data-testid="users-link"
+              >
+                Users
+              </Link>
+              <Link
+                to="/departments"
+                className=" hover:underline"
+                data-testid="users-link"
+              >
+                Departments
+              </Link>
+            </>
+          ) : (
+            ""
+          )}
           {manager || admin ? (
             <Link
               to="/tasks"
@@ -104,16 +105,17 @@ const Navbar = () => {
               My Tasks
             </Link>
           )}
-          {manager ||
-            (admin && (
-              <Link
-                to="/dashboard"
-                className=" hover:underline"
-                data-testid="users-link"
-              >
-                Dashboard
-              </Link>
-            ))}
+          {manager || admin ? (
+            <Link
+              to="/dashboard"
+              className=" hover:underline"
+              data-testid="users-link"
+            >
+              Dashboard
+            </Link>
+          ) : (
+            ""
+          )}
           {userInfo ? (
             <>
               <p>Welcome {userInfo.user.username}</p>

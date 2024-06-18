@@ -9,7 +9,7 @@ function UserTasksPage() {
   const [updateTask] = useUpdateTaskMutation(); // Destructure updateTask mutation
 
   const { userInfo } = useSelector((state) => state.auth);
-  const userId = userInfo._id; // Assuming user ID is stored in auth state
+  const userId = userInfo.user._id; // Assuming user ID is stored in auth state
 
   useEffect(() => {
     const fetchTasks = async () => {

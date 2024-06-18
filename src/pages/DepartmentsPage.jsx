@@ -23,35 +23,8 @@ const DepartmentsPage = () => {
   const [updateDepartment, { isLoading: isUpdating }] =
     useUpdateDepartmentMutation();
   const { data: users } = useGetAllUsersQuery();
-  const [updateUser] = useUpdateUserMutation();
 
   const editFormRef = useRef(null);
-
-  console.log(departments);
-  const dispatch = useDispatch();
-
-  // const handleCreateDepartment = async (e) => {
-  //   e.preventDefault();
-  //   if (!newDepartmentName.trim()) return; // Prevent empty department creation
-
-  //   try {
-  //     const result = await createDepartment({
-  //       name: newDepartmentName,
-  //       users: selectedUserIds,
-  //     });
-  //     console.log("Department created:", result.data); // Optional logging
-  //     setNewDepartmentName(""); // Clear input field
-  //     setSelectedUserIds([]); // Clear selected users
-  //     toast.success("Department created successfully!", {
-  //       position: "toast-position", // Replace with desired position (e.g., "top-right")
-  //     });
-  //   } catch (error) {
-  //     console.error("Error creating department:", error);
-  //     toast.error("Failed to create department!", {
-  //       position: "toast-position", // Replace with desired position (e.g., "top-right")
-  //     });
-  //   }
-  // };
 
   const handleCreateDepartment = async (e) => {
     e.preventDefault();
@@ -63,16 +36,6 @@ const DepartmentsPage = () => {
         users: selectedUserIds,
       });
       console.log("Department created:", result); // Optional logging
-
-      // Update user documents with the new department ID
-      await Promise.all(
-        selectedUserIds.map(async (userId) => {
-          await updateUser({
-            _id: userId,
-            department: result?.data,
-          });
-        })
-      );
 
       setNewDepartmentName(""); // Clear input field
       setSelectedUserIds([]); // Clear selected users
@@ -106,81 +69,26 @@ const DepartmentsPage = () => {
     setSelectedDepartment(department);
     setNewDepartmentName(department.name); // Pre-populate form with department details
     setSelectedUserIds(department.users.map((user) => user._id)); // Set selected users for editing
-
-    // Find the assigned user names based on selected user IDs
-    const assignedUsers = users
-      ?.filter((user) => selectedUserIds.includes(user._id))
-      .map((user) => user.name);
-
-    // Update UI to display assigned users
-    setAssignedUsers(assignedUsers.join(", "));
   };
-
-  // const handleUpdateDepartment = async (e) => {
-  //   e.preventDefault();
-  //   if (!newDepartmentName.trim()) return; // Prevent empty department update
-
-  //   try {
-  //     const result = await updateDepartment({
-  //       id: selectedDepartment._id,
-  //       name: newDepartmentName,
-  //       users: selectedUserIds,
-  //     });
-  //     console.log("Department updated:", result.data); // Optional logging
-  //     setSelectedDepartment(null); // Clear selected department for editing
-  //     setNewDepartmentName(""); // Clear input field
-  //     setSelectedUserIds([]); // Clear selected users
-  //     toast.success("Department updated successfully!", {
-  //       position: "toast-position", // Replace with desired position (e.g., "top-right")
-  //     });
-  //   } catch (error) {
-  //     console.error("Error updating department:", error);
-  //     toast.error("Failed to update department!", {
-  //       position: "toast-position", // Replace with desired position (e.g., "top-right")
-  //     });
-  //   }
-  // };
 
   const handleUpdateDepartment = async (e) => {
     e.preventDefault();
     if (!newDepartmentName.trim()) return; // Prevent empty department update
 
-    const departmentData = {
-      id: selectedDepartment._id,
-      name: newDepartmentName,
-      users: selectedUserIds,
-    };
-
     try {
-      const result = await updateDepartment(departmentData);
-      console.log("Department updated:", result.data); // Optional logging
-      setSelectedDepartment(null); // Clear selected department for editing
-      setNewDepartmentName(""); // Clear input field
-      setSelectedUserIds([]); // Clear selected users
+      const result = await updateDepartment({
+        id: selectedDepartment._id, // Use ID from selected department
+        name: newDepartmentName,
+        users: selectedUserIds,
+      });
+      console.log("Department updated:", result); // Optional logging
+
+      // Update local state with updated department details
+      setSelectedDepartment(result); // Update selected department state
+      setNewDepartmentName(result.name); // Update form with updated name
+
       toast.success("Department updated successfully!", {
         position: "toast-position", // Replace with desired position (e.g., "top-right")
-      });
-
-      // Update users data in the database (assuming 'updateUser' mutation updates user data)
-      selectedUserIds.forEach(async (userId) => {
-        // const userToUpdate = users.find((user) => user._id === userId);
-        const userToUpdate = { ...users.find((user) => user._id === userId) };
-
-        if (userToUpdate) {
-          // Update the user object with the assigned department
-          userToUpdate.department = departmentData.id; // Assuming 'department' field in the user object
-
-          // Call the updateUser mutation to update the user data
-          try {
-            await updateUser(userToUpdate);
-            console.log("User updated:", userToUpdate._id); // Optional logging
-          } catch (error) {
-            console.error("Error updating user:", error);
-            toast.error("Failed to update some users!", {
-              position: "toast-position", // Replace with desired position (e.g., "top-right")
-            });
-          }
-        }
       });
     } catch (error) {
       console.error("Error updating department:", error);
@@ -191,7 +99,7 @@ const DepartmentsPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 min-h-screen">
+    <div className="container mx-auto px-4 py-8 min-h-screen flex flex-col">
       <h1 className="text-xl font-bold mb-4">Departments</h1>
 
       <form
@@ -221,13 +129,13 @@ const DepartmentsPage = () => {
               </option>
             ))}
           </select>
-          <span className="text-gray-500 font-semibold">
+          <span className="text-gray-500 font-semibold w-40 flex items-center">
             {userSelectionLabel}
           </span>
         </div>
         <button
           type="submit"
-          className="w-32 rounded-md mt-2 bg-cyan-500 py-2 text-center text-white font-bold hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          className="w-40 rounded-md mt-2 bg-cyan-500 py-2 text-center text-white font-bold hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           disabled={isCreating || isUpdating} // Disable when creating or updating
         >
           {selectedDepartment ? "Update Department" : "Create Department"}
@@ -239,7 +147,7 @@ const DepartmentsPage = () => {
       ) : error ? (
         <p>Error fetching departments: {error.message}</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="">
           <Departments
             departments={departments}
             onEditDepartment={handleEditDepartment}

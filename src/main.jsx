@@ -17,6 +17,7 @@ import PrivateRoutes from "./routes/PrivateRoutes.jsx";
 import UsersPage from "./pages/UsersPage.jsx";
 import TasksPage from "./pages/TasksPage.jsx";
 import DepartmentsPage from "./pages/DepartmentsPage.jsx";
+import DepartmentDetailsPage from "./pages/DepartmentDetailsPage.jsx";
 import UserTasksPage from "./pages/UserTasksPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter(
         <Route path="/tasks" element={<TasksPage />} />
         <Route path="/mytasks" element={<UserTasksPage />} />
         <Route path="/departments" element={<DepartmentsPage />} />
+        <Route
+          path="/departments/:departmentId"
+          element={<DepartmentDetailsPage />}
+        />
         <Route path="/dashboard" element={<DashboardPage />} />
       </Route>
     </Route>

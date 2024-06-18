@@ -51,25 +51,7 @@ const EditUserForm = ({ user, handleChange, handleUpdateUser }) => {
           <option value="admin">admin</option>
         </select>
       </div>
-      <div className="flex flex-col">
-        <label htmlFor="department" className="mb-2">
-          Department:
-        </label>
-        <select
-          id="department"
-          name="department"
-          value={user.department}
-          onChange={handleChange}
-          className="px-3 py-2 border border-gray-300 rounded-md focus:outline-blue-500 focus:ring-1 focus:ring-blue-500"
-        >
-          <option value="">Select Department</option>
-          {departments?.map((department) => (
-            <option key={department._id} value={department._id}>
-              {department.name}
-            </option>
-          ))}
-        </select>
-      </div>
+
       <button
         type="button"
         className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"

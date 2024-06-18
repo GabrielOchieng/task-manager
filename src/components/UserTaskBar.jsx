@@ -39,11 +39,12 @@ const UserTaskBar = () => {
 
   // Group tasks by assigned user (assuming assignedTo is an ObjectId)
   const userTaskCounts = tasks.reduce((acc, task) => {
-    const userId = task.assignedTo.toString(); // Convert ObjectId to string
+    const userId = task.assignedTo?.toString(); // Convert ObjectId to string
     acc[userId] = (acc[userId] || 0) + 1;
     return acc;
   }, {});
 
+  console.log(users);
   // Get user names by mapping user IDs to user objects (optional for labels)
   const userNames = users.reduce((acc, user) => {
     acc[user._id.toString()] = user.name || user.username; // Use name or username if available

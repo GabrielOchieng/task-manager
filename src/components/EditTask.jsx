@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useGetAllUsersQuery } from "../redux/slices/usersApiSlice";
+import { useGetDepartmentsQuery } from "../redux/slices/departmentsApiSlice";
 
 const EditTask = ({ task, handleChange, handleUpdateTask }) => {
   const { data: users, isLoading, error } = useGetAllUsersQuery();
-
+  const { data: departments } = useGetDepartmentsQuery();
+  console.log(task);
   return (
     <form onSubmit={handleUpdateTask} className="flex flex-col space-y-4">
       <h2 className="text-lg font-bold">Update Task</h2>
@@ -34,7 +36,47 @@ const EditTask = ({ task, handleChange, handleUpdateTask }) => {
         />
       </div>
       <div className="flex flex-col mb-2">
+        <label htmlFor="departmentId" className="mb-1">
+          Department:
+        </label>
+        <select
+          id="departmentId"
+          name="departmentId"
+          value={task.departmentId}
+          onChange={handleChange}
+          className="px-3 py-2 border border-gray-300 rounded-md focus:outline-blue-500 focus:ring-1 focus:ring-blue-500"
+        >
+          <option value="">Select Department</option>
+          {departments?.map((department) => (
+            <option key={department._id} value={department._id}>
+              {department.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="flex flex-col mb-2">
         <label htmlFor="assignedTo" className="mb-1">
+          Assigned User:
+        </label>
+        <select
+          className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-blue-500 focus:ring-1 w-full"
+          id="assignedTo"
+          name="assignedTo"
+          value={task.assignedTo}
+          onChange={handleChange}
+        >
+          <option value="">Select User</option>
+          {/* Allow selection of only user within the selected department  */}
+          {task.departmentId &&
+            departments
+              ?.find((department) => department._id === task.departmentId)
+              ?.users?.map((user) => (
+                <option key={user._id} value={user._id}>
+                  {user.name}
+                </option>
+              ))}
+        </select>
+        {/* <label htmlFor="assignedTo" className="mb-1">
           Assigned User:
         </label>
         <select
@@ -50,9 +92,9 @@ const EditTask = ({ task, handleChange, handleUpdateTask }) => {
               {user.name}
             </option>
           ))}
-          {/* Replace with your logic to populate user options */}
-        </select>
+        </select> */}
       </div>
+
       <div className="flex flex-col mb-2">
         <label htmlFor="dueDate" className="mb-1">
           Due Date:
