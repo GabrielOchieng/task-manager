@@ -7,6 +7,7 @@ import {
 import User from "../components/Users";
 import Modal from "../components/Modal";
 import EditUserForm from "../components/EditUserForm";
+import Skeleton from "../components/Skeleton";
 
 const UsersPage = () => {
   const [employees, setEmployees] = useState([]);
@@ -86,7 +87,7 @@ const UsersPage = () => {
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen overflow-x-scroll">
       <h1 className="text-xl font-bold mb-4">Users</h1>
-      {isLoading && <p className="text-blue-500">Loading users...</p>}
+      {isLoading && <Skeleton />}
       {error && <p className="text-red-500">{error}</p>}
       {users?.length > 0 && (
         <table className="w-full table-auto shadow-md rounded-lg">

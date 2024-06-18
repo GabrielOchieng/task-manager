@@ -11,6 +11,7 @@ import {
   useGetAllUsersQuery,
   useUpdateUserMutation,
 } from "../redux/slices/usersApiSlice";
+import Skeleton from "../components/Skeleton";
 
 const DepartmentsPage = () => {
   const [newDepartmentName, setNewDepartmentName] = useState("");
@@ -143,7 +144,7 @@ const DepartmentsPage = () => {
       </form>
 
       {isLoading ? (
-        <p>Loading departments...</p>
+        <Skeleton />
       ) : error ? (
         <p>Error fetching departments: {error.message}</p>
       ) : (

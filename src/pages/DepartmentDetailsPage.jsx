@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"; // To access URL parameters
 import { useGetTasksQuery } from "../redux/slices/tasksApiSlice";
 import axios from "axios";
 import moment from "moment"; // Import Moment.js
+import Skeleton from "../components/Skeleton";
 
 const DepartmentDetails = () => {
   const { departmentId } = useParams(); // Get department ID from URL params
@@ -35,7 +36,7 @@ const DepartmentDetails = () => {
     (task) => task.departmentId === departmentId
   ); // Filter tasks
 
-  if (isLoading) return <p className="text-center p-4">Loading...</p>;
+  if (isLoading) return <Skeleton />;
   if (error)
     return (
       <p className="text-center p-4 text-red-500">Error: {error.message}</p>

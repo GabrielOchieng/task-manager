@@ -2,7 +2,6 @@ import React from "react";
 import { useGetTasksQuery } from "../redux/slices/tasksApiSlice";
 import { useGetAllUsersQuery } from "../redux/slices/usersApiSlice";
 import UserChart from "../components/UsersChart";
-import UserTaskBar from "../components/UserTaskBar";
 import UsersPerDepartmentChart from "../components/UsersDepartMentBar";
 import TasksBar from "../components/TaskBar";
 import TasksCompletedBar from "../components/TasksCompletedBar";

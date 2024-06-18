@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useUpdateTaskMutation } from "../redux/slices/tasksApiSlice";
+import Skeleton from "../components/Skeleton";
 
 function UserTasksPage() {
   const [tasks, setTasks] = useState([]);
@@ -77,7 +78,7 @@ function UserTasksPage() {
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen">
       <h1>Your Tasks</h1>
-      {isLoading && <p>Loading tasks...</p>}
+      {isLoading && <Skeleton />}
       {error && <p className="text-red-500">{error}</p>}
       {tasks.length > 0 ? (
         <ul className="list-none">

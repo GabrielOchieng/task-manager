@@ -2,13 +2,14 @@ import React from "react";
 import { Pie } from "react-chartjs-2"; // Import Pie chart component
 import { Chart as ChartJS, ArcElement, Legend, Tooltip } from "chart.js";
 import { useGetAllUsersQuery } from "../redux/slices/usersApiSlice";
+import Skeleton from "./Skeleton";
 
 ChartJS.register(ArcElement, Legend, Tooltip); // Register required elements
 
 const UserChart = () => {
   const { data: users, isLoading, error } = useGetAllUsersQuery();
 
-  if (isLoading) return <p>Loading Users...</p>;
+  if (isLoading) return <Skeleton />;
   if (error) return <p>Error: {error.message}</p>;
 
   // User data might not have roles property (check your model)

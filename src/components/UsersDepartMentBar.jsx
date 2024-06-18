@@ -2,13 +2,14 @@ import React from "react";
 import { Pie } from "react-chartjs-2"; // Import Pie chart component
 import { Chart as ChartJS, ArcElement, Legend, Tooltip } from "chart.js";
 import { useGetDepartmentsQuery } from "../redux/slices/departmentsApiSlice";
+import Skeleton from "./Skeleton";
 
 ChartJS.register(ArcElement, Legend, Tooltip); // Register required elements
 
 const UsersPerDepartmentChart = () => {
   const { data: departments, isLoading, error } = useGetDepartmentsQuery();
 
-  if (isLoading) return <p>Loading Departments...</p>;
+  if (isLoading) return <Skeleton />;
   if (error) return <p>Error: {error.message}</p>;
 
   // Ensure departments data is available before processing

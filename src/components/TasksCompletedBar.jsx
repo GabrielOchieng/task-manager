@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { useGetTasksQuery } from "../redux/slices/tasksApiSlice";
+import Skeleton from "./Skeleton";
 
 ChartJS.register(
   CategoryScale,
@@ -23,7 +24,7 @@ ChartJS.register(
 const TasksCompletedBar = () => {
   const { data: tasks, isLoading, error } = useGetTasksQuery();
 
-  if (isLoading) return <p>Loading Tasks...</p>;
+  if (isLoading) return <Skeleton />;
   if (error) return <p>Error: {error.message}</p>;
 
   // Ensure tasks data is available before processing
