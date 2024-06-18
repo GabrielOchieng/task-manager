@@ -14,9 +14,11 @@ React Router: (https://reacttraining.com/react-router) - For managing user navig
 React Toastify: (https://fkhadra.github.io/react-toastify/introduction/) - For displaying user notifications and feedback messages.
 React Icons: (https://react-icons.github.io/react-icons/) - For providing a variety of icons to enhance the user interface.
 Tailwind CSS: (https://tailwindcss.com/docs/installation) - For rapid and responsive web UI development with a utility-first approach.
-Note:
 
-Authentication, authorization logic, and data fetching are typically handled by the backend API (separate repository).
+
+**Note:**
+
+Authentication, authorization logic, and data fetching are typically handled by the backend API (https://github.com/GabrielOchieng/task-manager-api).
 This frontend code interacts with the backend API using mechanisms like fetch or Axios for data communication.
 Development Setup:
 Clone the repository: Clone this repository to your local machine using git clone https://<your_github_username>@github.com/<your_repository_name>.git.
