@@ -1,4 +1,4 @@
-This repository contains the frontend code for a task management website built using the MERN stack (MongoDB, Express, React, Node.js) with authentication and authorization functionalities.
+This repository contains the frontend code for a task management website built using the MERN stack (MongoDB, Express, React, Node.js) with authentication and authorization functionalities. The live hosted site is at https://task-manager-r6wk.onrender.com
 
 This repository specifically focuses on the frontend components and functionalities of the web application.
 
