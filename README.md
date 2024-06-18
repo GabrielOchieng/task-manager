@@ -37,4 +37,4 @@ This frontend code interacts with the backend API using mechanisms like Axios fo
 
 <h3>Further Development:</h3>
 
-For a complete functional application, you'll need to integrate this frontend code with the backend API (separate repository) that handles user authentication, authorization, data storage, and server-side logic.
+For a complete functional application, you'll need to integrate this frontend code with the backend API (https://github.com/GabrielOchieng/task-manager-api) that handles user authentication, authorization, data storage, and server-side logic.
