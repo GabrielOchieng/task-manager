@@ -65,15 +65,11 @@ const TasksPage = () => {
 
       // Assuming createTask returns the created task object
 
-      toast.success("Task created successfully!", {
-        position: "toast-position", // Replace with desired position (e.g., "top-right")
-      });
+      toast.success("Task created successfully!", {});
 
       // ... (other actions after successful creation, e.g., update UI)
     } catch (error) {
-      toast.error("Failed to create task!", {
-        position: "toast-position", // Replace with desired position (e.g., "top-right")
-      });
+      toast.error("Failed to create task!", {});
     } finally {
       setNewTaskTitle(""); // Clear the input field
       setNewDate("");
