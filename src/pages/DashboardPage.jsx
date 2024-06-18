@@ -7,7 +7,6 @@ import TasksBar from "../components/TaskBar";
 import TasksCompletedBar from "../components/TasksCompletedBar";
 
 const DashboardPage = () => {
-  const { data: tasks, isLoading, error } = useGetTasksQuery();
   return (
     <div className="w-[95%] mx-auto flex flex-wrap justify-between gap-20 py-8">
       <div className="  w-full md:w-[45%] h-96 border p-3">

@@ -39,13 +39,9 @@ const DepartmentsPage = () => {
 
       setNewDepartmentName(""); // Clear input field
       setSelectedUserIds([]); // Clear selected users
-      toast.success("Department created successfully!", {
-        position: "toast-position", // Replace with desired position (e.g., "top-right")
-      });
+      toast.success("Department created successfully!", {});
     } catch (error) {
-      toast.error("Failed to create department!", {
-        position: "toast-position", // Replace with desired position (e.g., "top-right")
-      });
+      toast.error("Failed to create department!", {});
     }
   };
 
@@ -85,13 +81,9 @@ const DepartmentsPage = () => {
       setSelectedDepartment(result); // Update selected department state
       setNewDepartmentName(result.name); // Update form with updated name
 
-      toast.success("Department updated successfully!", {
-        position: "toast-position", // Replace with desired position (e.g., "top-right")
-      });
+      toast.success("Department updated successfully!", {});
     } catch (error) {
-      toast.error("Failed to update department!", {
-        position: "toast-position", // Replace with desired position (e.g., "top-right")
-      });
+      toast.error("Failed to update department!", {});
     }
   };
 
