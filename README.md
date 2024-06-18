@@ -2,7 +2,7 @@ This repository contains the frontend code for a task management website built u
 
 This repository specifically focuses on the frontend components and functionalities of the web application.
 
-Features:
+<h1> Features: </h1>
 User Interface: Provides a user-friendly interface for creating, managing, and viewing tasks.
 Interactive Elements: Implements interactive features like drag-and-drop task reordering, checkboxes for marking tasks complete, and intuitive buttons for task actions.
 Responsive Design: Ensures the application adapts seamlessly to different screen sizes for optimal user experience across devices.
@@ -14,7 +14,6 @@ React Router: (https://reacttraining.com/react-router) - For managing user navig
 React Toastify: (https://fkhadra.github.io/react-toastify/introduction/) - For displaying user notifications and feedback messages.
 React Icons: (https://react-icons.github.io/react-icons/) - For providing a variety of icons to enhance the user interface.
 Tailwind CSS: (https://tailwindcss.com/docs/installation) - For rapid and responsive web UI development with a utility-first approach.
-
 
 **Note:**
 
@@ -29,4 +28,3 @@ Linting: Run npm run lint to check your code for potential errors and style inco
 Further Development:
 
 For a complete functional application, you'll need to integrate this frontend code with the backend API (separate repository) that handles user authentication, authorization, data storage, and server-side logic.
-
