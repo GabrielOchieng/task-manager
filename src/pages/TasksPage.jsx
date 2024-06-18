@@ -37,12 +37,8 @@ const TasksPage = () => {
   const { data: departments } = useGetDepartmentsQuery();
 
   const filteredTasks = tasks?.filter((task) => !task.completed); // Filter tasks where completed is false
-  console.log(tasks);
-  console.log("filtered: ", filteredTasks);
 
   const [createTask, { isLoading: isCreatingTask }] = useCreateTaskMutation();
-
-  // console.log("SELECTED", department);
 
   const handleAddTask = async (e) => {
     e.preventDefault();
@@ -59,8 +55,6 @@ const TasksPage = () => {
     }
 
     try {
-      console.log("selectedUserId:", selectedUserId); // Log the selected user ID
-
       const result = await createTask({
         title: newTaskTitle,
         description: newTaskDescription,
@@ -70,7 +64,6 @@ const TasksPage = () => {
       });
 
       // Assuming createTask returns the created task object
-      console.log("assignedTo in response:", result.assignedTo); // Log the assignedTo value from the response (optional)
 
       toast.success("Task created successfully!", {
         position: "toast-position", // Replace with desired position (e.g., "top-right")
@@ -78,7 +71,6 @@ const TasksPage = () => {
 
       // ... (other actions after successful creation, e.g., update UI)
     } catch (error) {
-      console.error("Error creating task:", error);
       toast.error("Failed to create task!", {
         position: "toast-position", // Replace with desired position (e.g., "top-right")
       });
@@ -115,17 +107,11 @@ const TasksPage = () => {
   };
 
   const handleUpdateTask = async () => {
-    console.log("Data sent to backend:", editedTaskData); // Log editedTaskData before sending
-
     try {
-      console.log("EDITTING", editedTaskData);
       const response = await updateTask({
         ...editedTaskData,
         _id: selectedTaskId,
       });
-      console.log("edit", editedTaskData);
-
-      console.log("Task updated successfully:", response.data);
 
       setIsEditing(false);
       setSelectedTaskId(null);
@@ -137,7 +123,6 @@ const TasksPage = () => {
         dueDate: "",
       });
     } catch (error) {
-      console.error("Error updating task:", error);
       // Handle update errors (e.g., display error message)
     }
   };
@@ -153,11 +138,8 @@ const TasksPage = () => {
     if (window.confirm("Are you sure you want to delete this task?")) {
       try {
         await deleteTask(taskId); // Call the mutation with taskId
-        console.log("Task deleted successfully");
         // Optional: Update local state if necessary (might not be needed)
-      } catch (error) {
-        console.error("Error deleting task:", error);
-      }
+      } catch (error) {}
     }
   };
 

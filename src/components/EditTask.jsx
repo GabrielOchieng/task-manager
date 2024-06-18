@@ -5,7 +5,7 @@ import { useGetDepartmentsQuery } from "../redux/slices/departmentsApiSlice";
 const EditTask = ({ task, handleChange, handleUpdateTask }) => {
   const { data: users, isLoading, error } = useGetAllUsersQuery();
   const { data: departments } = useGetDepartmentsQuery();
-  console.log(task);
+
   return (
     <form onSubmit={handleUpdateTask} className="flex flex-col space-y-4">
       <h2 className="text-lg font-bold">Update Task</h2>

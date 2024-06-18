@@ -32,10 +32,8 @@ const LoginPage = () => {
       // Check for successful login and presence of token in response
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
-        console.log("token", res.data.token); // Log the token for debugging (optional)
       } else {
         // Handle unsuccessful login (e.g., display error message)
-        console.log("login", res.data);
         toast.error(res.data?.message || "Login failed");
         return; // Exit the function if login fails
       }
@@ -44,22 +42,17 @@ const LoginPage = () => {
         "Content-Type": "application/json", // Assuming JSON data
       };
 
-      console.log("header:", headers);
       // Add Authorization header only if token is present
       if (localStorage.getItem("token")) {
         headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
       }
-      console.log("header2:", headers);
 
       dispatch(setCredentials({ ...res.data }));
       navigate("/");
     } catch (err) {
-      console.log("ERROR:", err);
       toast.error("Invalid Email or Password");
     }
   };
-
-  console.log(userInfo?.token);
 
   return (
     <div className="min-h-screen bg-cyan-100 flex items-center justify-center">

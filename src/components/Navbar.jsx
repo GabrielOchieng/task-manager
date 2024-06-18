@@ -17,7 +17,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [logoutApiCall] = useLogoutMutation();
 
-  console.log(userInfo);
   const manager = userInfo?.user.role === "manager";
   const admin = userInfo?.user.role === "admin";
 
@@ -27,7 +26,6 @@ const Navbar = () => {
       dispatch(logout());
       navigate("/");
     } catch (err) {
-      console.log(err);
       alert(err.message);
     }
   };

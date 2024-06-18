@@ -22,7 +22,6 @@ const UsersPage = () => {
   const { data: users, isLoading, error } = useGetAllUsersQuery();
   const [deleteUser] = useDeleteUserMutation(); // Destructure deleteUser mutation
   const [updateUser] = useUpdateUserMutation(); // Destructure updateUser mutation
-  console.log(users);
   const handleEdit = (userId) => {
     setIsEditing(true);
     setSelectedUserId(userId);
@@ -34,7 +33,6 @@ const UsersPage = () => {
     });
   };
 
-  console.log(editedUserData);
   const handleCloseModal = () => {
     setIsEditing(false);
     setSelectedUserId(null);
@@ -47,7 +45,6 @@ const UsersPage = () => {
         ...editedUserData,
         _id: selectedUserId,
       });
-      console.log("User updated successfully:", response);
       // Update local state if necessary
       setEmployees(
         employees.map((user) =>
@@ -57,10 +54,7 @@ const UsersPage = () => {
       setIsEditing(false);
       setSelectedUserId(null);
       setEditedUserData({ name: "", email: "", role: "", department: "" });
-    } catch (error) {
-      console.error("Error updating user:", error);
-      // Handle update errors (e.g., display error message)
-    }
+    } catch (error) {}
   };
 
   const handleChange = (event) => {
@@ -74,11 +68,9 @@ const UsersPage = () => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
         const response = await deleteUser(userId);
-        console.log("User deleted successfully:", response.data);
         // Update local state if necessary (e.g., remove user from employee list)
         setEmployees(employees.filter((user) => user._id !== userId));
       } catch (error) {
-        console.error("Error deleting user:", error);
         // Handle delete errors (e.g., display error message)
       }
     }

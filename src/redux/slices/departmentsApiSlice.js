@@ -37,7 +37,6 @@ export const departmentsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Department"], // Invalidate departments on delete
     }),
-    // ... other department endpoints (e.g., add/remove employee from department)
   }),
 });
 

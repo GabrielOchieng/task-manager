@@ -44,7 +44,6 @@ function UserTasksPage() {
           completed: true,
           inProgress: false,
         });
-        console.log("Task updated successfully:", response.data);
 
         // If successful, update the local state to reflect the change
         setTasks((prevTasks) =>
@@ -55,7 +54,6 @@ function UserTasksPage() {
           )
         );
       } catch (error) {
-        console.error("Error updating task:", error);
         // Handle update errors (e.g., display error message)
       }
     }
