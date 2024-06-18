@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { BiX } from "react-icons/bi";
 
-const Menu = ({ userInfo, handleLogout, manager, admin }) => {
+const Menu = ({ userInfo, handleLogout, manager, admin, scrollToBottom }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -71,6 +71,27 @@ const Menu = ({ userInfo, handleLogout, manager, admin }) => {
             >
               My Tasks
             </Link>
+          )}
+
+          {!userInfo ? (
+            <>
+              <Link
+                to=""
+                className=" hover:text-black"
+                data-testid="users-link"
+              >
+                <button onClick={scrollToBottom}>About Us</button>
+              </Link>
+              <Link
+                to=""
+                className=" hover:text-black"
+                data-testid="users-link"
+              >
+                <button onClick={scrollToBottom}>Contact Us</button>
+              </Link>
+            </>
+          ) : (
+            ""
           )}
           {manager ||
             (admin && (

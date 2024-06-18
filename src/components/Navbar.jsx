@@ -32,6 +32,13 @@ const Navbar = () => {
     }
   };
 
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth", // Optional for smooth scrolling
+    });
+  };
+
   // const manager = false;
 
   return (
@@ -49,6 +56,7 @@ const Navbar = () => {
           data-testid="mobile-menu"
           manager={manager}
           admin={admin}
+          scrollToBottom={scrollToBottom}
         />
       </div>
       {/* BIGGER SCREENS */}
@@ -104,6 +112,18 @@ const Navbar = () => {
             >
               My Tasks
             </Link>
+          )}
+          {!userInfo ? (
+            <>
+              <Link to="" className=" hover:underline" data-testid="users-link">
+                <button onClick={scrollToBottom}>About Us</button>
+              </Link>
+              <Link to="" className=" hover:underline" data-testid="users-link">
+                <button onClick={scrollToBottom}>Contact Us</button>
+              </Link>
+            </>
+          ) : (
+            ""
           )}
           {manager || admin ? (
             <Link
