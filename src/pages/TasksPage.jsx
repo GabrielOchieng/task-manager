@@ -6,7 +6,7 @@ import {
   useGetTasksQuery,
   useUpdateTaskMutation,
 } from "../redux/slices/tasksApiSlice";
-import { toast } from "react-toastify"; // Assuming you have react-toastify installed
+import { toast } from "react-toastify";
 import Task from "../components/Task";
 import { useGetAllUsersQuery } from "../redux/slices/usersApiSlice";
 import EditTask from "../components/EditTask";
@@ -65,7 +65,7 @@ const TasksPage = () => {
 
       // Assuming createTask returns the created task object
 
-      toast.success("Task created successfully!", {});
+      toast.success("Task created successfully!");
 
       // ... (other actions after successful creation, e.g., update UI)
     } catch (error) {
@@ -118,6 +118,7 @@ const TasksPage = () => {
         departmentId: "",
         dueDate: "",
       });
+      toast.success("Task updated successfully!");
     } catch (error) {
       // Handle update errors (e.g., display error message)
     }
