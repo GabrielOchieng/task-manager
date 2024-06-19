@@ -20,9 +20,12 @@ const DepartmentDetails = () => {
       try {
         const departmentResponse = await axios.get(
           `https://task-manager-api-cv0m.onrender.com/departments/${departmentId}`
+
+          // `http://localhost:5000/departments/${departmentId}`
         ); // Get department details
         setDepartment(departmentResponse.data);
       } catch (error) {
+        console.log(error);
         setError(error);
       } finally {
         setIsLoading(false);
