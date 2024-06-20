@@ -19,6 +19,7 @@ function UserTasksPage() {
       try {
         const response = await fetch(
           `https://task-manager-api-cv0m.onrender.com/tasks/${userId}/tasks`
+          // `http://localhost:5000/tasks/${userId}/tasks`
         ); // Get user tasks
         if (!response.ok) {
           throw new Error(`Error fetching tasks: ${response.statusText}`);
@@ -26,6 +27,7 @@ function UserTasksPage() {
         const data = await response.json();
         setTasks(data);
       } catch (error) {
+        console.log(error);
         setError(error.message);
       } finally {
         setIsLoading(false);

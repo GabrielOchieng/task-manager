@@ -48,7 +48,7 @@ const EditUserForm = ({ user, handleChange, handleUpdateUser }) => {
           <option value="">Select Role</option>
           <option value="user">user</option>
           <option value="manager">manager</option>
-          <option value="admin">admin</option>
+          {/* <option value="admin">admin</option> */}
         </select>
       </div>
 
