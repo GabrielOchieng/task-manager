@@ -32,11 +32,30 @@ const DepartmentsPage = () => {
     if (!newDepartmentName.trim()) return; // Prevent empty department creation
 
     try {
-      const result = await createDepartment({
-        name: newDepartmentName,
-        users: selectedUserIds,
+      // Check if any selected user already belongs to a department
+      const isUserInDepartment = departments?.some((dept) => {
+        for (const userId of selectedUserIds) {
+          if (dept.users.find((user) => user._id === userId)) {
+            return true; // If any user is found, return true
+          }
+        }
+        return false;
       });
 
+      if (isUserInDepartment) {
+        toast.warn(
+          "One or more selected users already belong to another department!",
+          {}
+        );
+        return; // Prevent creating department with duplicate user
+      }
+
+      const result = await createDepartment({
+        name: newDepartmentName,
+        users: selectedUserIds, // Assign selected user
+      });
+
+      // ... rest of the code for successful creation
       setNewDepartmentName(""); // Clear input field
       setSelectedUserIds([]); // Clear selected users
       toast.success("Department created successfully!", {});
@@ -71,13 +90,35 @@ const DepartmentsPage = () => {
     if (!newDepartmentName.trim()) return; // Prevent empty department update
 
     try {
+      // Check if selected user already belongs to another department (excluding the current one)
+      const isUserInAnotherDepartment = departments?.some((dept) => {
+        if (dept._id !== selectedDepartment._id) {
+          // Exclude current department
+          for (const userId of selectedUserIds) {
+            if (dept.users.find((user) => user._id === userId)) {
+              return true; // If any user is found, return true
+            }
+          }
+          return false;
+        }
+      });
+
+      if (isUserInAnotherDepartment) {
+        toast.warn(
+          "One or more selected users already belong to another department!",
+          {}
+        );
+        return; // Prevent updating department with duplicate user
+      }
+
       const result = await updateDepartment({
         id: selectedDepartment._id, // Use ID from selected department
         name: newDepartmentName,
-        users: selectedUserIds,
+        users: selectedUserIds, // Update with the selected user
       });
 
       // Update local state with updated department details
+
       setSelectedDepartment(result); // Update selected department state
       setNewDepartmentName(result.name); // Update form with updated name
 

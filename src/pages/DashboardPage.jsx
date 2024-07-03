@@ -9,17 +9,17 @@ import TasksCompletedBar from "../components/TasksCompletedBar";
 const DashboardPage = () => {
   return (
     <div className="w-[95%] mx-auto flex flex-wrap justify-between gap-20 py-8">
-      <div className="  w-full md:w-[45%] h-96 border p-3">
+      <div className="  w-full mx-auto md:w-[45%] h-80  p-3">
         <TasksBar />
       </div>
-      <div className=" w-[full] md:w-[45%] h-80 p-3 ">
+      <div className=" w-full mx-auto md:w-[45%] h-80 p-3 ">
         <UserChart />
       </div>
 
-      <div className=" w-full md:w-[45%] h-96 border p-3">
+      <div className=" w-full mx-auto md:w-[45%] h-80  p-3">
         <TasksCompletedBar />
       </div>
-      <div className=" w-[full] md:w-[45%] h-80 p-3">
+      <div className=" w-full mx-auto md:w-[45%] h-80 p-3">
         <UsersPerDepartmentChart />
       </div>
     </div>

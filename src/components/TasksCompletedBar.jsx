@@ -32,7 +32,7 @@ const TasksCompletedBar = () => {
 
   // Calculate total tasks per user
   const tasksPerUser = tasks.reduce((acc, task) => {
-    const userId = task.assignedTo.name; // Assuming `assignedTo` has a `name` property
+    const userId = task.assignedTo?.name; // Assuming `assignedTo` has a `name` property
     acc[userId] = (acc[userId] || 0) + 1; // Count total tasks per user
     return acc;
   }, {});
@@ -43,7 +43,7 @@ const TasksCompletedBar = () => {
   const completedTasksPerUser = userLabels.map((userId) => {
     const totalTasks = tasksPerUser[userId];
     const completedTasks = tasks.filter(
-      (task) => task.assignedTo.name === userId && task.completed
+      (task) => task.assignedTo?.name === userId && task.completed
     ).length;
     return Math.round((completedTasks / totalTasks) * 100); // Calculate percentage
   });
@@ -51,7 +51,7 @@ const TasksCompletedBar = () => {
   const incompleteTasksPerUser = userLabels.map((userId) => {
     const totalTasks = tasksPerUser[userId];
     const completedTasks = tasks.filter(
-      (task) => task.assignedTo.name === userId && task.completed
+      (task) => task.assignedTo?.name === userId && task.completed
     ).length;
     return Math.round(((totalTasks - completedTasks) / totalTasks) * 100); // Calculate percentage
   });

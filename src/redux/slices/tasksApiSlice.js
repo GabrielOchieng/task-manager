@@ -1,6 +1,8 @@
 import { apiSlice } from "./apiSlice";
 
-const TASKS_URL = "https://task-manager-api-cv0m.onrender.com/tasks";
+const TASKS_URL =
+  // "https://task-manager-api-cv0m.onrender.com/tasks";
+  "http://localhost:5000/tasks"; // For local development
 
 export const tasksApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
