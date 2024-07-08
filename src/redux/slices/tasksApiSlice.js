@@ -1,15 +1,14 @@
 import { apiSlice } from "./apiSlice";
 
-const TASKS_URL =
-  // "https://task-manager-api-cv0m.onrender.com/tasks";
-  "http://localhost:5000/tasks"; // For local development
+const TASKS_URL = "https://task-manager-api-cv0m.onrender.com/tasks";
+// "http://localhost:5000/tasks"; // For local development
 
 export const tasksApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // GET all tasks
     getTasks: builder.query({
       query: () => TASKS_URL,
-      providesTags: (result) => (result || result.length ? ["Task"] : []), // Tag tasks
+      providesTags: (result) => (result || result?.length ? ["Task"] : []), // Tag tasks
     }),
 
     // CREATE a new task

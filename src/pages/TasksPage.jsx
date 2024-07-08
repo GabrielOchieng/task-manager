@@ -102,13 +102,15 @@ const TasksPage = () => {
     });
   };
 
-  const handleUpdateTask = async () => {
+  const handleUpdateTask = async (e) => {
+    e.preventDefault();
     try {
       const response = await updateTask({
         ...editedTaskData,
         _id: selectedTaskId,
       });
-
+      toast.success("Task updated successfully!", {});
+      console.log("Task updated successfully:", response.data);
       setIsEditing(false);
       setSelectedTaskId(null);
       setEditedTaskData({
@@ -119,7 +121,7 @@ const TasksPage = () => {
         dueDate: "",
       });
     } catch (error) {
-      // Handle update errors (e.g., display error message)
+      toast.error("Failed to update task!", {});
     }
   };
 

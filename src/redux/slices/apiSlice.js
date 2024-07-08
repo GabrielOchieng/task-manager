@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
+  // baseUrl: "http://localhost:5000",
   baseUrl: "https://task-manager-api-cv0m.onrender.com",
   prepareHeaders: (headers, { getState }) => {
     const token = localStorage.getItem("token");

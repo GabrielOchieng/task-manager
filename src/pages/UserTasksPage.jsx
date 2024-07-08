@@ -31,6 +31,7 @@ function UserTasksPage() {
         setError(error.message);
       } finally {
         setIsLoading(false);
+        setError(null);
       }
     };
 
@@ -56,13 +57,13 @@ function UserTasksPage() {
           )
         );
       } catch (error) {
-        // Handle update errors (e.g., display error message)
+        // Handle update errors
       }
     }
   };
 
   const handleMarkInProgress = async (taskId) => {
-    // Simulate updating task status on server (replace with your actual API call)
+    // Simulate updating task status on server
 
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
@@ -71,13 +72,11 @@ function UserTasksPage() {
           : task
       )
     );
-
-    // Send an actual update request to your backend API if applicable
   };
 
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen">
-      <h1>Your Tasks</h1>
+      <h1 className="font-bold underline">Your Tasks</h1>
       {isLoading && <Skeleton />}
       {error && <p className="text-red-500">{error}</p>}
       {tasks.length > 0 ? (

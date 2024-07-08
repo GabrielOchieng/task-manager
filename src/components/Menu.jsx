@@ -36,42 +36,41 @@ const Menu = ({ userInfo, handleLogout, manager, admin, scrollToBottom }) => {
             Home
           </Link>
 
-          {manager ||
-            (admin && (
-              <>
-                <Link
-                  to="/users"
-                  className=" hover:text-black"
-                  data-testid="users-link"
-                >
-                  Users
-                </Link>
-                <Link
-                  to="/departments"
-                  className=" hover:text-black"
-                  data-testid="users-link"
-                >
-                  Departments
-                </Link>
-              </>
-            ))}
           {manager || admin ? (
-            <Link
-              to="/tasks"
-              className=" hover:text-black"
-              data-testid="users-link"
-            >
-              Tasks
-            </Link>
+            <>
+              <Link
+                to="/users"
+                className=" hover:text-black"
+                data-testid="users-link"
+              >
+                Users
+              </Link>
+              <Link
+                to="/departments"
+                className=" hover:text-black"
+                data-testid="users-link"
+              >
+                Departments
+              </Link>
+              <Link
+                to="/tasks"
+                className=" hover:text-black"
+                data-testid="users-link"
+              >
+                Tasks
+              </Link>
+            </>
           ) : (
-            <Link
-              to="/mytasks"
-              className=" hover:text-black"
-              data-testid="users-link"
-            >
-              My Tasks
-            </Link>
+            ""
           )}
+
+          <Link
+            to="/mytasks"
+            className=" hover:text-black"
+            data-testid="users-link"
+          >
+            My Tasks
+          </Link>
 
           {!userInfo ? (
             <>
@@ -93,20 +92,21 @@ const Menu = ({ userInfo, handleLogout, manager, admin, scrollToBottom }) => {
           ) : (
             ""
           )}
-          {manager ||
-            (admin && (
-              <Link
-                to="/dashboard"
-                className=" hover:text-black"
-                data-testid="users-link"
-              >
-                Dashboard
-              </Link>
-            ))}
+          {manager || admin ? (
+            <Link
+              to="/dashboard"
+              className=" hover:text-black"
+              data-testid="users-link"
+            >
+              Dashboard
+            </Link>
+          ) : (
+            ""
+          )}
           {userInfo ? (
             <>
-              <p>Welcome {userInfo.user.username}</p>
-              <p> {userInfo.user.role}</p>
+              <p>Welcome {userInfo?.user?.username}</p>
+              <p> {userInfo?.user?.role}</p>
               <Link
                 to="/"
                 onClick={handleLogout}

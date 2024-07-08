@@ -17,8 +17,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [logoutApiCall] = useLogoutMutation();
 
-  const manager = userInfo?.user.role === "manager";
-  const admin = userInfo?.user.role === "admin";
+  const manager = userInfo?.user?.role === "manager";
+  const admin = userInfo?.user?.role === "admin";
 
   const handleLogout = async () => {
     try {
@@ -90,27 +90,28 @@ const Navbar = () => {
               >
                 Departments
               </Link>
+              <>
+                <Link
+                  to="/tasks"
+                  className=" hover:underline"
+                  data-testid="users-link"
+                >
+                  Tasks
+                </Link>
+              </>
             </>
           ) : (
             ""
           )}
-          {manager || admin ? (
-            <Link
-              to="/tasks"
-              className=" hover:underline"
-              data-testid="users-link"
-            >
-              Tasks
-            </Link>
-          ) : (
-            <Link
-              to="/mytasks"
-              className=" hover:underline"
-              data-testid="users-link"
-            >
-              My Tasks
-            </Link>
-          )}
+
+          <Link
+            to="/mytasks"
+            className=" hover:underline"
+            data-testid="users-link"
+          >
+            My Tasks
+          </Link>
+
           {!userInfo ? (
             <>
               <Link to="" className=" hover:underline" data-testid="users-link">
@@ -136,8 +137,8 @@ const Navbar = () => {
           )}
           {userInfo ? (
             <>
-              <p>Welcome {userInfo.user.username}</p>
-              <p> {userInfo.user.role}</p>
+              <p>Welcome {userInfo?.user?.username}</p>
+              <p> {userInfo?.user?.role}</p>
               <Link
                 to="/"
                 onClick={handleLogout}

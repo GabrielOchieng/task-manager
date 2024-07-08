@@ -32,7 +32,7 @@ const TasksCompletedBar = () => {
 
   // Calculate total tasks per user
   const tasksPerUser = tasks.reduce((acc, task) => {
-    const userId = task.assignedTo?.name; // Assuming `assignedTo` has a `name` property
+    const userId = task?.assignedTo?.name;
     acc[userId] = (acc[userId] || 0) + 1; // Count total tasks per user
     return acc;
   }, {});
